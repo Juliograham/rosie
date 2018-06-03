@@ -50,6 +50,7 @@
         // create an array of markers based on a given "locations" array.
         // The map() method here has nothing to do with the Google Maps API.
   var infoWin = new google.maps.InfoWindow();
+  var currentMark;
   var markers = locations.map(function(location, i) {
   var marker = new google.maps.Marker({
     position: location
@@ -57,13 +58,16 @@
   google.maps.event.addListener(marker, 'click', function(evt) {
     infoWin.setContent(location.img);
     infoWin.open(map, marker);
+  });
+  google.maps.event.addDomListener(window, 'wheel', () => {
+    infoWin.close();
   })
   return marker;
 });
 
         // Add a marker clusterer to manage the markers.
         var markerCluster = new MarkerClusterer(map, markers,
-            {maxZoom: 5.9, imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            {maxZoom: 5.9, imagePath: 'imgs/m'});
       }
       var locations = [
         {lat: 38.897486, lng: -77.036402, img:'<img src="imgs/img0.jpg"/><br><h3>The White House</h3>'},
@@ -90,8 +94,7 @@
         {lat: 29.725730, lng: -95.390314, img:'<img src="imgs/img22.jpg"/><br><h3>Museum of Fine Arts, Houston</h3>'},
         {lat: 29.423567, lng: -98.486263, img:'<img src="imgs/img23.jpg"/><br><h3>St Joseph\'s Catholic Church</h3>'},
         {lat: 30.276085, lng: -97.753286, img:'<img src="imgs/img24.jpg"/><br><h3>HOPE Outdoor Gallery</h3>'},
-        {lat: 32.788916, lng: -97.349033, img:'<img src="imgs/img25.JPG"/><br><h3>Fort Worth Stockyards</h3>'},
-        {}
+        {lat: 32.788916, lng: -97.349033, img:'<img src="imgs/img25.JPG"/><br><h3>Fort Worth Stockyards</h3>'}
       ]
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
